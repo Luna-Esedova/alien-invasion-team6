@@ -4,7 +4,7 @@ import pygame
 
 
 from settings import Settings
-
+from ship import Ship
 
 
 def run_game() -> None:
@@ -18,8 +18,8 @@ def run_game() -> None:
     pygame.display.set_caption(ai_settings.caption)
 
 
-    cloock = pygame.time.Clock()
-
+    clock = pygame.time.Clock()
+    ship = Ship(ai_settings, screen)
 
     # Load sound effect if avaliable in assets folder
     shoot_sound = None
@@ -32,14 +32,25 @@ def run_game() -> None:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                sys.quit()
+                sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
+                if event.key == pygame.K_RIGHT:
+                    ship.moving_right = True:
+                elif event.key == pygame.K_LEFT:
+                    ship.moving_left = True
+                elif event.key == pygame.K_q:
                     pygame.quit()
                     sys.exit()
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT:
+                    ship.moving_right = False
+                elif event.key == pygame.K_LEFT:
+                    ship.moving_left = False
         
 
+        ship.update()
         screen.fill(ai.settings.bg_color)
+        ship.blitme()
         pygame.display.flip()
         clock.tick(60)
 
