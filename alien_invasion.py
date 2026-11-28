@@ -28,14 +28,14 @@ def run_game() -> None:
         shoot_sound = pygame.mixer.Sound(sound_path)
 
 
-    while true:
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
-                    ship.moving_right = True:
+                    ship.moving_right = True
                 elif event.key == pygame.K_LEFT:
                     ship.moving_left = True
                 elif event.key == pygame.K_q:
@@ -49,7 +49,7 @@ def run_game() -> None:
         
 
         ship.update()
-        screen.fill(ai.settings.bg_color)
+        screen.fill(ai_settings.bg_color)
         ship.blitme()
         pygame.display.flip()
         clock.tick(60)
